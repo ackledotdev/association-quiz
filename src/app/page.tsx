@@ -13,17 +13,12 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
-	/**
-		useEffect(() => {
-			if (window.location.host != PersonalDomain)
-				window.location.href = PersonalRootUrl;
-		});
-	*/
+	useEffect(() => {
+		if (window.location.host != PersonalDomain)
+			window.location.href = PersonalRootUrl;
+	});
 
 	const [Quiz, setQuiz] = useState<_Quiz>();
-	const pathname = usePathname();
-
-	// const Collector = new ResponseCollector();
 
 	const [responses, setResponses] = useState<QuizResponse>([]);
 
@@ -33,7 +28,6 @@ export default function Home() {
 	const [resultsHidden, setResultsHidden] = useState(true);
 
 	const [qIndex, setQIndex] = useState(-1);
-	// const q = Quiz.getQuestionResponseSet(qIndex);
 
 	const [checkboxes, setCheckboxes] = useState<boolean[]>([]);
 
