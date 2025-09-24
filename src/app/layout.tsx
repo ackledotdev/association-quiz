@@ -3,7 +3,7 @@ import './globals.css';
 import { cn } from '@/lib/utils';
 import Footer from '@/components/layout/footer';
 import { Analytics } from '@vercel/analytics/next';
-import { RootUrl } from '@/lib/constants';
+import { PersonalRootUrl, RootUrl } from '@/lib/constants';
 import { fontSans } from './fonts';
 
 const Title = 'Association Quizzes';
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		type: 'website',
 		locale: 'en-US',
-		url: RootUrl,
+		url: PersonalRootUrl,
 		title: {
 			absolute: Title,
 			default: Title,
