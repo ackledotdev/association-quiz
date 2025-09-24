@@ -1,0 +1,9 @@
+.bar-inside {
+	background: linear-gradient(to right, var(--color-start), var(--color-end));
+	/* background: linear-gradient(
+		to right,
+		in oklch,
+		var(--color-start),
+		var(--color-end)
+	); */
+}
