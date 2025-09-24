@@ -7,7 +7,7 @@ import { RootUrl } from '@/lib/constants';
 import { fontSans } from './fonts';
 
 const Title = 'Association Quizzes';
-const Description = 'Take various assocative quizzes to ';
+const Description = 'Take various assocative quizzes to determine which alignment you fit the best';
 
 export const metadata: Metadata = {
 	title: {
