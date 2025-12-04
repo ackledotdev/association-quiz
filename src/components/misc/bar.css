@@ -1,3 +1,12 @@
+@keyframes fill-bar {
+	from {
+		width: 0;
+	}
+	to {
+		width: var(--width);
+	}
+}
+
 .bar-inside {
 	background: linear-gradient(to right, var(--color-start), var(--color-end));
 	/* background: linear-gradient(
@@ -6,4 +15,6 @@
 		var(--color-start),
 		var(--color-end)
 	); */
+	width: var(--width);
+	animation: fill-bar var(--animation-time) ease-in-out 1s forwards;
 }

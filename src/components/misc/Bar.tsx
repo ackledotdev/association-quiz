@@ -26,8 +26,8 @@ export default function Bar({
 				className='bar-inside m-0 h-full p-0'
 				style={{
 					borderRadius: radius,
-					width: `${width}%`,
 					// @ts-expect-error
+					'--width': `${width}%`,
 					'--color-start': colorStart,
 					'--color-end': colorEnd
 				}}
