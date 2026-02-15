@@ -13,7 +13,6 @@
 	--font-sans: var(--font-sans);
 	--font-mono:
 		var(--font-mono), ui-monospace, 'Courier New', monospace;
-
 }
 
 @utility animation-respectful {
@@ -98,7 +97,6 @@
 	--wordwrap-class-md: {
 		max-width: 48rem;
 	}
-;
 
 	--radius: 0.625rem;
 
@@ -162,7 +160,8 @@
 
 	--sidebar-border: oklch(0.922 0 0);
 
-	--sidebar-ring: oklch(0.708 0 0)}
+	--sidebar-ring: oklch(0.708 0 0)
+}
 
 .full-content-class {
 	min-height: var(--full-content-height);

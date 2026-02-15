@@ -5,9 +5,11 @@ import Footer from '@/components/layout/footer';
 import { Analytics } from '@vercel/analytics/next';
 import { PersonalRootUrl, RootUrl } from '@/lib/constants';
 import { fontSans } from './fonts';
+import Nav from '@/components/layout/nav';
 
 const Title = 'Association Quizzes';
-const Description = 'Take various assocative quizzes to determine which alignment you fit the best';
+const Description =
+	'Take various assocative quizzes to determine which alignment you fit the best';
 
 export const metadata: Metadata = {
 	title: {
@@ -65,8 +67,12 @@ export default function RootLayout({
 		<html lang='en-us'>
 			<head />
 			<body
-				className={cn('bg-background font-sans antialiased', fontSans.variable)}
+				className={cn(
+					'bg-background pt-12 font-sans antialiased',
+					fontSans.variable
+				)}
 			>
+				<Nav />
 				{children}
 				<Footer />
 				<Analytics />

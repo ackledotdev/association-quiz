@@ -13,6 +13,8 @@ export async function GET(
 
 	const quizData = await redis.hGet(KEYS.QUIZ_HASHSET_DATA, hash);
 
+	redis.close();
+
 	if (!quizData) return new Response('Quiz not found', { status: 404 });
 
 	return new Response(quizData, {

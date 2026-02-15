@@ -27,5 +27,7 @@ export async function POST(request: Request) {
 		}
 	}
 
+	redis.close();
+
 	return new Response('Failed to generate unique hash', { status: 500 });
 }

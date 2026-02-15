@@ -14,10 +14,7 @@ while (!redis.isReady) {}
 
 console.log('Redis client is ready.');
 
-await redis.set(
-	KEYS.QUIZ_UPLOAD_KEY,
-	process.env.QUIZ_UPLOAD_KEY!
-);
+await redis.set(KEYS.QUIZ_UPLOAD_KEY, process.env.QUIZ_UPLOAD_KEY!);
 
 await redis.close();
 console.log('Disconnected from Redis.');

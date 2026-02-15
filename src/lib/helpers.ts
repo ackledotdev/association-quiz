@@ -66,9 +66,7 @@ export function validateQuizData(data: unknown): data is ValidQuizData {
 			)
 		) &&
 		(!result.data.explanations ||
-			(expKeys.every(
-				(key) => result.data.options.includes
-			) &&
+			(expKeys.every((key) => result.data.options.includes) &&
 				result.data.options.every((opt) => expKeys.includes)))
 	);
 }
