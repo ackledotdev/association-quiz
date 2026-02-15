@@ -61,7 +61,7 @@ export default function QuizContainer({ data }: { data: QuizData }) {
 							return (
 								<Label
 									key={i}
-									className='hover:bg-accent/50 flex items-start gap-3 rounded-lg border border-black p-3 has-aria-checked:border-lime-600 has-aria-checked:bg-lime-50'
+									className='hover:bg-accent/50 flex items-start gap-3 rounded-lg border-2 border-gray-500 p-3 has-aria-checked:border-lime-600'
 								>
 									<Checkbox
 										id={`cb-${i}`}
@@ -88,7 +88,7 @@ export default function QuizContainer({ data }: { data: QuizData }) {
 					>
 						<div
 							id='quiz-results-shareable'
-							className='grid grid-cols-[8em_auto_4em] gap-2 self-stretch md:gap-4 lg:grid-cols-[12em_auto_8em] lg:gap-6'
+							className='bg-background text-foreground grid grid-cols-[8em_auto_4em] gap-2 self-stretch md:gap-4 lg:grid-cols-[12em_auto_8em] lg:gap-6'
 							ref={resultsRef}
 						>
 							<h2 className='col-span-full text-2xl font-bold'>Your Results</h2>
@@ -106,7 +106,7 @@ export default function QuizContainer({ data }: { data: QuizData }) {
 										key={i}
 										colorStart='#ffaaaa'
 										colorEnd='#ff0000'
-										bgColor='#dddddd'
+										bgColor='#88888890'
 										width={Math.round(g.weight)}
 									/>
 								))}
@@ -132,7 +132,7 @@ export default function QuizContainer({ data }: { data: QuizData }) {
 							<p className='col-span-full text-sm lg:pt-4 lg:text-base'>
 								{Quiz.explanations?.[grade?.at(0)!.option ?? ''] ?? ''}
 							</p>
-							<p className='col-span-full text-sm text-neutral-500 italic lg:text-base'>
+							<p className='col-span-full text-sm text-neutral-400 italic lg:text-base'>
 								* Results may not be 100% accurate and are for entertainment
 								purposes only.
 							</p>
