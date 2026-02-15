@@ -16,5 +16,5 @@
 		var(--color-end)
 	); */
 	width: var(--width);
-	animation: fill-bar var(--animation-time) ease-in-out 1s forwards;
+	/* animation: fill-bar var(--animation-time) ease-in-out 1s forwards; */
 }

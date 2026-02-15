@@ -7,22 +7,30 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Toaster } from '@/components/ui/sonner';
 import { dataUrlToFile, useScreenshot } from '@/hooks/useScreenshot';
-import { PersonalDomain, PersonalRootUrl } from '@/lib/constants';
+import { PersonalRootUrl } from '@/lib/constants';
 import { Quiz as _Quiz } from '@/lib/Quiz';
 import { ResponseCollector } from '@/lib/ResponseCollector';
 import { QuizResponse, QuizScore } from '@/lib/schema';
-import { usePathname } from 'next/navigation';
 import { RefObject, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 
-export default function QuizPage() {
-	useEffect(() => {
-		if (
-			process.env.NODE_ENV === 'production' &&
-			window.location.host != PersonalDomain
-		)
-			window.location.href = PersonalRootUrl;
-	});
+export default async function QuizPage({
+	params
+}: {
+	params: Promise<{ hash: string }>;
+}) {
+	const { hash } = await params;
+
+	// now using Vercel domain redirects
+	// useEffect(() => {
+	// 	if (
+	// 		process.env.NODE_ENV === 'production' &&
+	// 		window.location.host != PersonalDomain
+	// 	)
+	// 		window.location.href = PersonalRootUrl;
+	// });
+
+	const urlInputRef = useRef<HTMLInputElement>(null);
 
 	const [Quiz, setQuiz] = useState<_Quiz>();
 
@@ -58,6 +66,7 @@ export default function QuizPage() {
 						<Label htmlFor='quiz-url'>Quiz URL</Label>
 						<Input
 							id='quiz-url'
+							ref={urlInputRef}
 							type='url'
 							className='w-full max-w-lg'
 							placeholder='https://quiz.ackle.dev/literary-criticism-quiz.json'
@@ -87,7 +96,7 @@ export default function QuizPage() {
 							return (
 								<Label
 									key={i}
-									className='hover:bg-accent/50 flex items-start gap-3 rounded-lg border border-black p-3 has-[[aria-checked=true]]:border-lime-600 has-[[aria-checked=true]]:bg-lime-50'
+									className='hover:bg-accent/50 flex items-start gap-3 rounded-lg border border-black p-3 has-aria-checked:border-lime-600 has-aria-checked:bg-lime-50'
 								>
 									<Checkbox
 										id={`cb-${i}`}
@@ -169,20 +178,17 @@ export default function QuizPage() {
 									captureScreenshot(resultsRef as RefObject<HTMLElement>).then(
 										(dataUrl) => {
 											const file = dataUrlToFile(dataUrl, 'quiz-results.png');
+											const payload: ShareData = {
+												files: [file],
+												text: 'My Literary Criticism Quiz Results!',
+												url: PersonalRootUrl
+											};
 											if (
-												!!navigator.canShare &&
-												!!navigator.share &&
-												navigator.canShare({
-													files: [file],
-													text: 'My Literary Criticism Quiz Results!',
-													url: PersonalRootUrl
-												})
+												navigator.canShare &&
+												navigator.share &&
+												navigator.canShare(payload)
 											)
-												navigator.share({
-													files: [file],
-													text: 'My Literary Criticism Quiz Results!',
-													url: PersonalRootUrl
-												});
+												navigator.share(payload);
 											else {
 												// copy file
 												navigator.clipboard.write([
@@ -236,18 +242,21 @@ export default function QuizPage() {
 
 	async function advance() {
 		if (!Quiz) {
-			const urlInput = document.getElementById('quiz-url') as HTMLInputElement;
-			if (!urlInput.value) return alert('Please enter a URL to quiz data.');
+			// const urlInput = urlInputRef.current;
+			// if (!urlInput || !urlInput.value)
+			// 	return alert('Please enter a URL to quiz data.');
 			try {
-				const Url = new URL(urlInput.value);
-				const res = await fetch(Url);
-				if (!res.ok)
-					return alert(
-						'Failed to fetch quiz data. Please check the URL and try again.'
-					);
+				// 	const Url = new URL(urlInput.value);
+				// 	const res = await fetch(Url);
+				// 	if (!res.ok)
+				// 		return alert(
+				// 			'Failed to fetch quiz data. Please check the URL and try again.'
+				// 		);
 
-				const json = (await res.json()) as unknown;
-				if (!_Quiz.validateQuizData(json)) return alert('Invalid quiz data.');
+				// 	const json = (await res.json()) as unknown;
+				// 	if (!_Quiz.validateQuizData(json)) return alert('Invalid quiz data.');
+
+				const json = await fetch(`/api/quiz/${hash}`).then((res) => res.json());
 
 				setQuiz(new _Quiz(json));
 				setImportHidden(true);
