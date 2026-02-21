@@ -8,12 +8,6 @@
 	"trailingComma": "none",
 	"useTabs": true,
 	"jsxSingleQuote": true,
-	"plugins": [
-		"prettier-plugin-tailwindcss"
-	],
-	"tailwindFunctions": [
-		"cn",
-		"cva",
-		"tw"
-	]
+	"plugins": ["prettier-plugin-tailwindcss"],
+	"tailwindFunctions": ["cn", "cva", "tw"]
 }

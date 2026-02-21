@@ -1,7 +1,8 @@
 import QuestionBuilder from '@/components/builders/QuestionBuilder';
 import QuizBuilder from '@/components/builders/QuizBuilder';
+import { Toaster } from '@/components/ui/sonner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { PersonalRootUrl, RootUrl } from '@/lib/constants';
+import { PersonalRootUrl } from '@/lib/constants';
 import { Metadata } from 'next';
 
 const Title = 'Builder',
@@ -34,19 +35,22 @@ export const metadata: Metadata = {
 
 export default function BuilderPage() {
 	return (
-		<main className='m-8 flex flex-col items-center gap-8 px-4 *:text-center lg:m-16'>
-			<Tabs defaultValue='question'>
-				<TabsList>
-					<TabsTrigger value='quiz'>Quiz</TabsTrigger>
-					<TabsTrigger value='question'>Question</TabsTrigger>
-				</TabsList>
-				<TabsContent value='question'>
-					<QuestionBuilder />
-				</TabsContent>
-				<TabsContent value='quiz'>
-					<QuizBuilder />
-				</TabsContent>
-			</Tabs>
-		</main>
+		<>
+			<main className='m-8 flex flex-col items-center gap-8 px-4 *:text-center lg:m-16'>
+				<Tabs defaultValue='question'>
+					<TabsList className='self-center-safe'>
+						<TabsTrigger value='quiz'>Quiz</TabsTrigger>
+						<TabsTrigger value='question'>Question</TabsTrigger>
+					</TabsList>
+					<TabsContent value='question'>
+						<QuestionBuilder />
+					</TabsContent>
+					<TabsContent value='quiz'>
+						<QuizBuilder />
+					</TabsContent>
+				</Tabs>
+			</main>
+			<Toaster />
+		</>
 	);
 }
