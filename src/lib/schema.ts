@@ -5,8 +5,10 @@ export interface QuizData {
 	description: string;
 	questions: Question[];
 	options: AssociativeOption[];
-	explanations?: Record<AssociativeOption, string>;
+	explanations?: OptionExplanationSet;
 }
+
+export type OptionExplanationSet = Record<AssociativeOption, string>;
 
 export interface ValidQuizData extends QuizData {}
 

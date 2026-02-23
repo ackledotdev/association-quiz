@@ -2,12 +2,11 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "next dev --turbopack",
+		"dev": "next dev",
 		"build": "next build",
 		"start": "next start",
 		"up": "ncu -ui",
-		"fmt": "prettier -w .",
-		"clean": "rm -rf .next *.tsbuildinfo"
+		"fmt": "prettier -w ."
 	},
 	"dependencies": {
 		"@radix-ui/react-checkbox": "^1.3.3",

@@ -16,7 +16,6 @@ import { highlight } from 'sugar-high';
 function QuestionBuilder() {
 	const [, copy] = useCopyToClipboard();
 
-	const [question, setQuestion] = useState('');
 	const questionRef = useRef<HTMLInputElement>(null);
 
 	const BlankAnswer: Answer = {
@@ -36,7 +35,7 @@ function QuestionBuilder() {
 
 	const questionJson = JSON.stringify(
 		{
-			question,
+			question: questionRef.current?.value ?? '',
 			answers: Array.from(answers.values()).filter(
 				(answer): answer is Answer => answer !== null
 			)
@@ -48,16 +47,16 @@ function QuestionBuilder() {
 	const deferredIsStale = deferredQuestionJson !== questionJson;
 
 	return (
-		<div className='my-4 py-4'>
-			<Label htmlFor='input-question' className='mb-2'>
-				<RedStar /> Question
+		<div className='min-w-lg'>
+			<Label htmlFor='input-question' className='mb-2 pl-1'>
+				Question
+				<RedStar />
 			</Label>
 			<Input
 				id='input-question'
 				ref={questionRef}
 				placeholder="What's your favorite food?"
 				className='mb-4 w-full self-stretch'
-				onChange={() => setQuestion(questionRef.current!.value)}
 			/>
 
 			{...Array.from(
@@ -128,7 +127,8 @@ function QuestionBuilder() {
 	}
 
 	function exportQuestion() {
-		if (!question) return toast.error('Question cannot be empty.');
+		if (!questionRef.current?.value)
+			return toast.error('Question cannot be empty.');
 		const answersArray = Array.from(answers.values()).filter(
 			(ans) => ans !== null
 		);
