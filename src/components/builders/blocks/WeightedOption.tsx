@@ -36,10 +36,12 @@ function WeightedOptionBlock({
 				ref={numRef}
 				className='grow-0'
 				type='number'
+				min={1}
+				max={10}
 				placeholder='Weight'
 				value={assoc.weight}
 				onChange={() =>
-					onChange({ ...assoc, weight: parseInt(numRef.current!.value) || 0 })
+					onChange({ ...assoc, weight: numRef.current!.valueAsNumber ?? 0 })
 				}
 			/>
 			<p

@@ -24,9 +24,19 @@ function OptionExplanationBlock({
 
 	return (
 		<div className='flex flex-col gap-2 rounded-md border p-4'>
-			<Label htmlFor={`option-explanation-option-${index}`} className='pl-1'>
-				Result {index + 1} <RedStar />
-			</Label>
+			<div className='mb-2 flex flex-row items-end justify-between'>
+				<Label htmlFor={`option-explanation-option-${index}`} className='pl-1'>
+					Result {index + 1} <RedStar />
+				</Label>
+				{deletable && (
+					<p
+						className='text-destructive cursor-pointer self-center-safe rounded-full text-sm underline'
+						onClick={() => deletable && onDelete()}
+					>
+						Delete
+					</p>
+				)}
+			</div>
 			<Input
 				id={`option-explanation-option-${index}`}
 				ref={inputRef}
@@ -41,7 +51,6 @@ function OptionExplanationBlock({
 				className='pl-1'
 			>
 				Explanation
-				{/* <RedStar /> */}
 			</Label>
 			<Textarea
 				id={`option-explanation-explanation-${index}`}
