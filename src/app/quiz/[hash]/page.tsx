@@ -5,6 +5,7 @@ import { Quiz as _Quiz } from '@/lib/Quiz';
 import { QuizData } from '@/lib/schema';
 import { Suspense } from 'react';
 import { createClient } from 'redis';
+import QuizPublishDialog from './QuizPublishDialog';
 
 export default async function QuizPage({
 	params
@@ -32,17 +33,20 @@ export default async function QuizPage({
 	const json = JSON.parse(quizData) as QuizData;
 
 	return (
-		<Suspense
-			fallback={
-				<>
-					<Link href='/' className='block text-center'>
-						Go Back
-					</Link>
-					<div>Loading quiz...</div>
-				</>
-			}
-		>
-			<QuizContainer data={json} />
-		</Suspense>
+		<>
+			<Suspense
+				fallback={
+					<>
+						<Link href='/' className='block text-center'>
+							Go Back
+						</Link>
+						<div>Loading quiz...</div>
+					</>
+				}
+			>
+				<QuizContainer data={json} />
+			</Suspense>
+			<QuizPublishDialog />
+		</>
 	);
 }

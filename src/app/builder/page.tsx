@@ -34,11 +34,12 @@ export const metadata: Metadata = {
 };
 
 export default function BuilderPage() {
+
 	return (
 		<>
 			<main className='m-8 flex flex-col items-center gap-8 px-4 *:text-center lg:m-16'>
-				<Tabs defaultValue='question'>
-					<TabsList className='self-center-safe'>
+				<Tabs defaultValue='quiz' className='w-full max-w-4xl'>
+					<TabsList className='mb-8 self-center-safe'>
 						<TabsTrigger value='quiz'>Quiz</TabsTrigger>
 						<TabsTrigger value='question'>Question</TabsTrigger>
 					</TabsList>

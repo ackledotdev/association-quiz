@@ -5,12 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Toaster } from '@/components/ui/sonner';
+import { toast } from 'sonner';
 import { dataUrlToFile, useScreenshot } from '@/hooks/useScreenshot';
 import { PersonalRootUrl } from '@/lib/constants';
 import { Quiz as _Quiz } from '@/lib/Quiz';
 import { QuizData, QuizResponse, QuizScore } from '@/lib/schema';
 import { RefObject, useRef, useState } from 'react';
-import { toast } from 'sonner';
 
 export default function QuizContainer({ data }: { data: QuizData }) {
 	const Quiz = new _Quiz(data);

@@ -31,16 +31,17 @@ function AnswerBlock({
 	const [highestIndex, setHighestIndex] = useState(0);
 
 	return (
-		<div className='border-accent my-2 flex flex-col rounded-lg border-2 p-4'>
+		<div className='border-accent my-4 flex flex-col rounded-lg border-2 p-4'>
 			<div className='mb-2 flex flex-row items-end justify-between'>
-				<Label htmlFor={`input-answer-${index}`}>
-					<RedStar />
+				<Label htmlFor={`input-answer-${index}`} className='pl-1'>
 					Answer
+					<RedStar />
 				</Label>
 				{deletable && (
 					<p
 						className='text-destructive cursor-pointer self-center-safe rounded-full text-sm underline'
 						onClick={() => deletable && onDelete(answer)}
+						tabIndex={0}
 					>
 						Delete
 					</p>
@@ -52,12 +53,9 @@ function AnswerBlock({
 				value={answer.response}
 				onChange={(e) => onChange({ ...answer, response: e.target.value })}
 			/>
-			<Label
-				className='mt-4 mb-2 flex items-center gap-1'
-				htmlFor={`input-association-${index}`}
-			>
-				<RedStar />
+			<Label className='mt-4 mb-2 pl-1' htmlFor={`input-association-${index}`}>
 				Association
+				<RedStar />
 			</Label>
 			{...answer.association.map((assoc, index) => (
 				<WeightedOptionBlock
