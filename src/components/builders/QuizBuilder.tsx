@@ -5,26 +5,22 @@ import RedStar from '../misc/RedStar';
 import { Input } from '../ui/input';
 import { memo, useDeferredValue, useEffect, useRef, useState } from 'react';
 import { Textarea } from '../ui/textarea';
-import { useCopyToClipboard, useMap } from 'usehooks-ts';
+import { useCopyToClipboard } from 'usehooks-ts';
 import RawQuestionInput from './blocks/RawQuestionInput';
 import { toast } from 'sonner';
-import {
-	OptionExplanationSet,
-	Question,
-	QuizData,
-	QuizSchema
-} from '@/lib/schema';
+import { OptionExplanationSet, QuizData, QuizSchema } from '@/lib/schema';
 import { Button } from '../ui/button';
 import { highlight } from 'sugar-high';
 import { ScrollArea } from '../ui/scroll-area';
 import { Copy, Download, Upload } from 'lucide-react';
 import Link from 'next/link';
-import WeightedOption from './blocks/WeightedOption';
 import OptionExplanation from './blocks/OptionExplanation';
 import { useRouter } from 'next/navigation';
 import { BuilderContext } from '@/app/contexts/BuilderContext';
 
 function QuizBuilder() {
+	const router = useRouter();
+
 	const [_, copy] = useCopyToClipboard();
 
 	const quizRef = useRef<HTMLInputElement>(null);
@@ -32,7 +28,7 @@ function QuizBuilder() {
 
 	const [questions, setQuestions] = useState<string[]>(['']);
 
-	const BlankOptionExplanationSet: OptionExplanationSet = {
+	const BlankOptionExplanationSet = {
 		option: '',
 		explanation: ''
 	};
@@ -210,7 +206,7 @@ function QuizBuilder() {
 									.join('\n');
 								toast.error(err);
 							} else {
-								useRouter().push('/upload/');
+								router.push('/upload/');
 							}
 						}}
 					>

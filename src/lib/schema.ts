@@ -99,6 +99,6 @@ export const QuizSchema = z
 			),
 		{
 			message:
-				'All explanation keys must be included in the options array and be non-empty.'
+				'All options must have corresponding explanations that are non-empty.'
 		}
 	);

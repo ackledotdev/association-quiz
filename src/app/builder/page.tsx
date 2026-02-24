@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 };
 
 export default function BuilderPage() {
-	
+
 	return (
 		<>
 			<main className='m-8 flex flex-col items-center gap-8 px-4 *:text-center lg:m-16'>
