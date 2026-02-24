@@ -41,6 +41,7 @@ function AnswerBlock({
 					<p
 						className='text-destructive cursor-pointer self-center-safe rounded-full text-sm underline'
 						onClick={() => deletable && onDelete(answer)}
+						tabIndex={0}
 					>
 						Delete
 					</p>

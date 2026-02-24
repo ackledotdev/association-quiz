@@ -47,6 +47,7 @@ function WeightedOptionBlock({
 			<p
 				className='text-destructive w-8 cursor-pointer'
 				onClick={() => deletable && onDelete(assoc)}
+				tabIndex={deletable ? 0 : undefined}
 			>
 				{deletable && 'X'}
 			</p>

@@ -32,6 +32,7 @@ function OptionExplanationBlock({
 					<p
 						className='text-destructive cursor-pointer self-center-safe rounded-full text-sm underline'
 						onClick={() => deletable && onDelete()}
+						tabIndex={0}
 					>
 						Delete
 					</p>

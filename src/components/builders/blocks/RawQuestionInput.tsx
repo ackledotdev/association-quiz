@@ -42,6 +42,7 @@ function RawQuestionInput({
 				style={{
 					opacity: !deletable ? 0.25 : 1
 				}}
+				tabIndex={deletable ? undefined : -1}
 			>
 				Delete
 			</Button>
