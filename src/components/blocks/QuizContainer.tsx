@@ -153,18 +153,27 @@ export default function QuizContainer({ data }: { data: QuizData }) {
 												navigator.share &&
 												navigator.canShare(payload)
 											)
-												navigator.share(payload);
-											else {
-												// copy file
-												navigator.clipboard.write([
-													new ClipboardItem({
-														[file.type]: file
-													})
-												]);
-												toast.success(
-													'Results screenshot copied to clipboard!'
+												toast.promise(navigator.share(payload), {
+													loading: 'Sharing results...',
+													success: 'Results shared successfully!',
+													error: 'Failed to share results.'
+												});
+											else
+												toast.promise(
+													navigator.clipboard.write([
+														new ClipboardItem({
+															[file.type]: file
+														})
+													]),
+													{
+														loading:
+															'Cannot share, copying results screenshot to clipboard...',
+														success:
+															'Cannot share. Results screenshot copied to clipboard!',
+														error:
+															'Cannot share, failed to copy results screenshot.'
+													}
 												);
-											}
 										}
 									);
 								}}

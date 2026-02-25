@@ -76,9 +76,18 @@ export const QuizSchema = z
 					a.association.every((assoc) => obj.options.includes(assoc.option))
 				)
 			),
-		{
-			message: 'All associations must be included in the options array.'
-		}
+		'All associations must be included in the options array.'
+	)
+	.refine(
+		(obj) =>
+			obj.options.every((opt) =>
+				obj.questions.some((q) =>
+					q.answers.some((a) =>
+						a.association.some((assoc) => assoc.option === opt)
+					)
+				)
+			),
+		'All options must be associated with at least one answer.'
 	)
 	.refine(
 		(obj) =>
@@ -86,9 +95,7 @@ export const QuizSchema = z
 			Object.keys(obj.explanations).every((option) =>
 				obj.options.includes(option)
 			),
-		{
-			message: 'All explanation keys must be included in the options array.'
-		}
+		'All explanation keys must be included in the options array.'
 	)
 	.refine(
 		(obj) =>
@@ -97,8 +104,5 @@ export const QuizSchema = z
 				(option) =>
 					option in obj.explanations! && obj.explanations![option].length > 0
 			),
-		{
-			message:
-				'All options must have corresponding explanations that are non-empty.'
-		}
+		'All options must have corresponding explanations that are non-empty.'
 	);

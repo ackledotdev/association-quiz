@@ -1,5 +1,5 @@
 import { KEYS } from '@/lib/constants';
-import { validateQuizData } from '@/lib/helpers';
+import { QuizSchema } from '@/lib/schema';
 import { createClient } from 'redis';
 
 export async function POST(request: Request) {
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
 	if (authHeader !== `Custom ${await redis.get(KEYS.QUIZ_UPLOAD_KEY)}`)
 		return new Response('Unauthorized', { status: 403 });
 
-	if (!validateQuizData(quizData))
+	if (!QuizSchema.safeParse(quizData).success)
 		return new Response('Invalid quiz data', { status: 400 });
 
 	for (let i = 0; i < 32; i++) {

@@ -13,7 +13,7 @@ import {
 import { Field } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { PersonalRootUrl } from '@/lib/constants';
-import { Copy } from 'lucide-react';
+import { Copy, Share2 } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'sonner';
 import { useCopyToClipboard } from 'usehooks-ts';
@@ -24,6 +24,10 @@ export default function QuizPublishDialog() {
 
 	const pathname = usePathname();
 	const url = `${PersonalRootUrl}${pathname}`;
+	const urlPayload = {
+		url
+	} satisfies ShareData;
+
 	const router = useRouter();
 
 	if (!searchParams.has('created')) return null;
@@ -55,6 +59,34 @@ export default function QuizPublishDialog() {
 							}
 						>
 							<Copy size={8} />
+						</Button>
+						<Button
+							className='grow-0 basis-1'
+							variant='secondary'
+							onClick={() => {
+								if (
+									(window.navigator.canShare as
+										| typeof window.navigator.canShare
+										| undefined) &&
+									(window.navigator.share as
+										| typeof window.navigator.share
+										| undefined) &&
+									window.navigator.canShare(urlPayload)
+								)
+									toast.promise(window.navigator.share(urlPayload), {
+										loading: 'Sharing...',
+										success: 'Quiz shared successfully!',
+										error: 'Failed to share quiz.'
+									});
+								else
+									toast.promise(copy(url), {
+										loading: 'Cannot share, copying link...',
+										success: 'Cannot share. Link copied to clipboard!',
+										error: 'Cannot share, and failed to copy link.'
+									});
+							}}
+						>
+							<Share2 size={8} />
 						</Button>
 					</Field>
 					<DialogFooter>

@@ -109,7 +109,7 @@ export default function Uploader() {
 					<>
 						<Tabs
 							defaultValue='file'
-							className='h-40'
+							className='h-56'
 							onValueChange={(v) => setTab(v as 'file' | 'text')}
 						>
 							<TabsList className='mb-4 self-center'>
@@ -149,7 +149,7 @@ export default function Uploader() {
 										onChange={() =>
 											setTextLength(textareaRef.current!.value.length)
 										}
-										className='font-mono text-sm'
+										className='h-32 max-h-32 font-mono text-sm'
 										rows={1}
 									/>
 								</div>
