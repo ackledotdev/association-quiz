@@ -17,6 +17,7 @@ export default async function QuizPage({
 		url: process.env.REDIS_URL
 	}).connect();
 	const quizData = await redis.hGet(KEYS.QUIZ_HASHSET_DATA, hash);
+	redis.close();
 
 	if (!quizData) {
 		return (

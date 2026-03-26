@@ -1,16 +1,9 @@
 import { QuizDisplayData } from '@/lib/redisSchema';
-// import { useState } from 'react';
 import QuizTile from './QuizTile';
 import { KEYS } from '@/lib/constants';
 import { createClient } from 'redis';
 
 export default async function QuizzesGrid() {
-	// const [quizzes, setQuizzes] = useState<QuizDisplayData[]>([]);
-	// const data = (await fetch('/api/quizzes/all/').then((res) =>
-	// 	res.json()
-	// )) as QuizDisplayData[];
-	// setQuizzes(data);
-
 	const redis = await createClient({
 		url: process.env.REDIS_URL
 	}).connect();
@@ -27,6 +20,7 @@ export default async function QuizzesGrid() {
 				description
 			} satisfies QuizDisplayData);
 	}
+	redis.close();
 
 	return (
 		<div className='grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
