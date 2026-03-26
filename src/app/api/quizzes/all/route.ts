@@ -9,8 +9,6 @@ export async function GET() {
 
 	const hashes = await redis.lRange(KEYS.QUIZ_STACK, 0, -1);
 
-	redis.close();
-
 	const quizStack: QuizDisplayData[] = [];
 
 	for (const hash of hashes) {
@@ -24,6 +22,8 @@ export async function GET() {
 				description
 			} satisfies QuizDisplayData);
 	}
+
+	redis.close();
 
 	return new Response(JSON.stringify(quizStack));
 }

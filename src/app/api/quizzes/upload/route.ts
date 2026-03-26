@@ -21,7 +21,7 @@ export async function POST(request: Request) {
 		const hash = Math.random().toString(36).toLowerCase().substring(2, 9);
 		if (!hashes.includes(hash)) {
 			await redis.hSet(KEYS.QUIZ_HASHSET_DATA, hash, JSON.stringify(quizData));
-			await redis.lPush(KEYS.QUIZ_STACK, hash);
+			// await redis.lPush(KEYS.QUIZ_STACK, hash); // Leave this to be done manually?
 			return new Response(hash, { status: 201 });
 		}
 	}
